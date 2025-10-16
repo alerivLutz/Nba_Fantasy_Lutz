@@ -105,11 +105,14 @@ namespace NbaFantasyProjekt
                             }
                             else
                             {
+                                Console.ForegroundColor= ConsoleColor.Red;
                                 Console.WriteLine("Please provide only numbers");
+                                Console.ResetColor();
+                                Console.ReadKey();
 
                             }
                         }
-                        Console.Clear();
+                        
 
 
 
@@ -136,7 +139,10 @@ namespace NbaFantasyProjekt
                             }
                             else
                             {
+                                Console.ForegroundColor = ConsoleColor.Red;
                                 Console.WriteLine("Please provide only numbers");
+                                Console.ResetColor();
+                                Console.ReadKey();
 
                             }
                         }
@@ -154,7 +160,10 @@ namespace NbaFantasyProjekt
                             }
                             else
                             {
+                                Console.ForegroundColor = ConsoleColor.Red;
                                 Console.WriteLine("Please provide only numbers");
+                                Console.ResetColor();
+                                Console.ReadKey();
                             }
                         }
                         int rebounds;
@@ -175,9 +184,9 @@ namespace NbaFantasyProjekt
 
                         }
                         int threes;
+                        Console.Clear();
                         while (true)
                         {
-                            Console.Clear();
                             Console.WriteLine("Threes");
                             var threesInput = Console.ReadLine();
                             if (int.TryParse(threesInput, out threes))
@@ -186,7 +195,10 @@ namespace NbaFantasyProjekt
                             }
                             else
                             {
+                                Console.ForegroundColor = ConsoleColor.Red;
                                 Console.WriteLine("Please provide only numbers");
+                                Console.ResetColor();
+                                Console.ReadKey();
                             }
                         }
 
@@ -200,7 +212,10 @@ namespace NbaFantasyProjekt
                             { break; }
                             else
                             {
+                                Console.ForegroundColor = ConsoleColor.Red;
                                 Console.WriteLine("Please provide only numbers");
+                                Console.ResetColor();
+                                Console.ReadKey();
                             }
                         }
                         int blocks;
@@ -213,7 +228,10 @@ namespace NbaFantasyProjekt
                             { break; }
                             else
                             {
-                                Console.WriteLine("PLease provide numbers only");
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.WriteLine("Please provide only numbers");
+                                Console.ResetColor();
+                                Console.ReadKey(); 
 
                             }
                         }
@@ -227,7 +245,10 @@ namespace NbaFantasyProjekt
                             { break; }
                             else
                             {
-                                Console.WriteLine("Please provide numbers only");
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.WriteLine("Please provide only numbers");
+                                Console.ResetColor();
+                                Console.ReadKey();
 
                             }
                         }
@@ -241,7 +262,10 @@ namespace NbaFantasyProjekt
                             { break; }
                             else
                             {
+                                Console.ForegroundColor = ConsoleColor.Red;
                                 Console.WriteLine("Please provide only numbers");
+                                Console.ResetColor();
+                                Console.ReadKey();
                             }
                         }
 
@@ -255,7 +279,10 @@ namespace NbaFantasyProjekt
                             { break; }
                             else
                             {
-                                Console.WriteLine("Please provide numbers only");
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.WriteLine("Please provide only numbers");
+                                Console.ResetColor();
+                                Console.ReadKey();
                             }
                         }
 
