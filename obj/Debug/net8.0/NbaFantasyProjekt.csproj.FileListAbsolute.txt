@@ -1,0 +1,15 @@
+C:\Users\RiveraChangAlejandro\source\repos\NbaFantasyProjekt\NbaFantasyProjekt\bin\Debug\net8.0\NbaFantasyProjekt.exe
+C:\Users\RiveraChangAlejandro\source\repos\NbaFantasyProjekt\NbaFantasyProjekt\bin\Debug\net8.0\NbaFantasyProjekt.deps.json
+C:\Users\RiveraChangAlejandro\source\repos\NbaFantasyProjekt\NbaFantasyProjekt\bin\Debug\net8.0\NbaFantasyProjekt.runtimeconfig.json
+C:\Users\RiveraChangAlejandro\source\repos\NbaFantasyProjekt\NbaFantasyProjekt\bin\Debug\net8.0\NbaFantasyProjekt.dll
+C:\Users\RiveraChangAlejandro\source\repos\NbaFantasyProjekt\NbaFantasyProjekt\bin\Debug\net8.0\NbaFantasyProjekt.pdb
+C:\Users\RiveraChangAlejandro\source\repos\NbaFantasyProjekt\NbaFantasyProjekt\obj\Debug\net8.0\NbaFantasyProjekt.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\RiveraChangAlejandro\source\repos\NbaFantasyProjekt\NbaFantasyProjekt\obj\Debug\net8.0\NbaFantasyProjekt.AssemblyInfoInputs.cache
+C:\Users\RiveraChangAlejandro\source\repos\NbaFantasyProjekt\NbaFantasyProjekt\obj\Debug\net8.0\NbaFantasyProjekt.AssemblyInfo.cs
+C:\Users\RiveraChangAlejandro\source\repos\NbaFantasyProjekt\NbaFantasyProjekt\obj\Debug\net8.0\NbaFantasyProjekt.csproj.CoreCompileInputs.cache
+C:\Users\RiveraChangAlejandro\source\repos\NbaFantasyProjekt\NbaFantasyProjekt\obj\Debug\net8.0\NbaFantasyProjekt.sourcelink.json
+C:\Users\RiveraChangAlejandro\source\repos\NbaFantasyProjekt\NbaFantasyProjekt\obj\Debug\net8.0\NbaFantasyProjekt.dll
+C:\Users\RiveraChangAlejandro\source\repos\NbaFantasyProjekt\NbaFantasyProjekt\obj\Debug\net8.0\refint\NbaFantasyProjekt.dll
+C:\Users\RiveraChangAlejandro\source\repos\NbaFantasyProjekt\NbaFantasyProjekt\obj\Debug\net8.0\NbaFantasyProjekt.pdb
+C:\Users\RiveraChangAlejandro\source\repos\NbaFantasyProjekt\NbaFantasyProjekt\obj\Debug\net8.0\NbaFantasyProjekt.genruntimeconfig.cache
+C:\Users\RiveraChangAlejandro\source\repos\NbaFantasyProjekt\NbaFantasyProjekt\obj\Debug\net8.0\ref\NbaFantasyProjekt.dll
