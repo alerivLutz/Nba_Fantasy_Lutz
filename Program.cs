@@ -1,11 +1,13 @@
-﻿namespace NbaFantasyProjekt
+﻿using System.Drawing;
+
+namespace NbaFantasyProjekt
 {
     internal class Program
     {
         static void Main(string[] args)
         {
             // This is our Welcoming screen where we will be trying to create an NBA logo.
-           
+
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("N     N  BBBBB    AAAAA       *******    ");
             Console.WriteLine("NN    N  B    B  A     A    *      * *  ");
@@ -17,7 +19,7 @@
             Console.WriteLine("                              ********    ");
             Console.ResetColor();
 
-            Console.ForegroundColor= ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("FFFFF   AAAAA  N     N  TTTTT  AAAAA  SSSS   Y   Y");
             Console.WriteLine("F       A   A  NN    N    T    A   A  S      Y   Y");
             Console.WriteLine("FFFF    AAAAA  N N   N    T    AAAAA  SSSS    Y Y ");
@@ -25,7 +27,7 @@
             Console.WriteLine("F       A   A  N   N N    T    A   A  SSSS     Y  ");
             Console.ResetColor();
 
-            Console.ForegroundColor=ConsoleColor.Red;
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("DDDD   RRRR    AAAAA  FFFFF  TTTTT");
             Console.WriteLine("D   D  R   R  A     A F        T  ");
             Console.WriteLine("D   D  RRRR   AAAAAAA FFFF     T  ");
@@ -35,12 +37,15 @@
 
             Console.ReadKey();
 
-           Menu();
+            Menu();
 
         }
 
         public static void Menu()
+
         {
+            List<PlayerRank_Stats> player = new List<PlayerRank_Stats>();
+
             int auswahl = 0;
             List<string> options = new List<string>()
         {
@@ -48,7 +53,7 @@
             "2. How many teams will be playing in the League",
             "3. Get draft order",
             "4. Start the draft!",
-        
+
         };
             while (true)
             {
@@ -68,15 +73,203 @@
                         Console.WriteLine(options[i]);
                     }
                 }
-               
+
 
                 var key = Console.ReadKey().Key;
                 if (key == ConsoleKey.UpArrow) auswahl--;
                 else if (key == ConsoleKey.DownArrow) auswahl++;
                 if (auswahl < 0) auswahl = options.Count - 1;
                 if (auswahl >= options.Count) auswahl = 0;
-                if (key == ConsoleKey.Enter) ;
+                if (key == ConsoleKey.Enter)
+                {
+                    if (auswahl == 0)
+                    {
+
+                        Console.Clear();
+
+                        Console.WriteLine("Lets create a Player! ");
+                        Thread.Sleep(2000);
+
+
+                        int rank;
+                        while (true)
+                        {
+                            Console.Clear();
+                            Console.WriteLine("Rank");
+
+                            var rankInput = Console.ReadLine();
+
+                            if (int.TryParse(rankInput, out rank))
+                            {
+                                break;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Please provide only numbers");
+
+                            }
+                        }
+                        Console.Clear();
+
+
+
+                        Console.WriteLine("Name");
+                        var name = Console.ReadLine();
+                        Console.Clear();
+
+                        Console.WriteLine("Last Name");
+                        var lastname = Console.ReadLine();
+                        Console.Clear();
+
+
+                        int points;
+                        while (true)
+                        {
+                            Console.Clear();
+                            Console.WriteLine("Points");
+
+                            var pointsInput = Console.ReadLine();
+
+                            if (int.TryParse(pointsInput, out points))
+                            {
+                                break;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Please provide only numbers");
+
+                            }
+                        }
+
+                        int assists;
+                        while (true)
+                        {
+                            Console.Clear();
+                            Console.WriteLine("Assists");
+
+                            var assistsInput = Console.ReadLine();
+                            if (int.TryParse(assistsInput, out assists))
+                            {
+                                break;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Please provide only numbers");
+                            }
+                        }
+                        int rebounds;
+                        while (true)
+                        {
+                            Console.Clear();
+                            Console.WriteLine("Rebounds");
+
+                            var reboundsInput = Console.ReadLine();
+                            if (int.TryParse(reboundsInput, out rebounds))
+                            {
+                                break;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Please provide only numbers");
+                            }
+
+                        }
+                        int threes;
+                        while (true)
+                        {
+                            Console.Clear();
+                            Console.WriteLine("Threes");
+                            var threesInput = Console.ReadLine();
+                            if (int.TryParse(threesInput, out threes))
+                            {
+                                break;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Please provide only numbers");
+                            }
+                        }
+
+                        int steals;
+                        while (true)
+                        {
+                            Console.Clear();
+                            Console.WriteLine("Steals");
+                            var stealsInput = Console.ReadLine();
+                            if (int.TryParse(stealsInput, out steals))
+                            { break; }
+                            else
+                            {
+                                Console.WriteLine("Please provide only numbers");
+                            }
+                        }
+                        int blocks;
+                        while (true)
+                        {
+                            Console.Clear();
+                            Console.WriteLine("Blocks");
+                            var blocksInput = Console.ReadLine();
+                            if (int.TryParse(blocksInput, out blocks))
+                            { break; }
+                            else
+                            {
+                                Console.WriteLine("PLease provide numbers only");
+
+                            }
+                        }
+                        int tunronvers;
+                        while (true)
+                        {
+                            Console.Clear();
+                            Console.WriteLine("Tunrovers");
+                            var tunronversInput = Console.ReadLine();
+                            if (int.TryParse(tunronversInput, out tunronvers))
+                            { break; }
+                            else
+                            {
+                                Console.WriteLine("Please provide numbers only");
+
+                            }
+                        }
+                        int fGpercent;
+                        while (true)
+                        {
+                            Console.Clear();
+                            Console.WriteLine("FG%");
+                            var fGpercentInput = Console.ReadLine();
+                            if (int.TryParse(fGpercentInput, out fGpercent))
+                            { break; }
+                            else
+                            {
+                                Console.WriteLine("Please provide only numbers");
+                            }
+                        }
+
+                        int fTpercent;
+                        while (true)
+                        {
+                            Console.Clear();
+                            Console.WriteLine("FT%");
+                            var tpercentInput = Console.ReadLine();
+                            if (int.TryParse(tpercentInput, out fTpercent))
+                            { break; }
+                            else
+                            {
+                                Console.WriteLine("Please provide numbers only");
+                            }
+                        }
+
+
+
+
+
+
+                    }
+                }
+
             }
         }
     }
 }
+
+
