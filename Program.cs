@@ -1,4 +1,7 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Data;
+using System.Drawing;
+using System.Xml.Linq;
 
 namespace NbaFantasyProjekt
 {
@@ -44,7 +47,9 @@ namespace NbaFantasyProjekt
         public static void Menu()
 
         {
-            List<PlayerRank_Stats> player = new List<PlayerRank_Stats>();
+            List<PlayerRank_Stats> players = new List<PlayerRank_Stats>();
+            List<Teams> teams = new List<Teams>();
+            List<Draft> drafts = new List<Draft>();
 
             int auswahl = 0;
             List<string> options = new List<string>()
@@ -82,6 +87,7 @@ namespace NbaFantasyProjekt
                 if (auswahl >= options.Count) auswahl = 0;
                 if (key == ConsoleKey.Enter)
                 {
+                    // Here is the code where we will add player to the data bank 
                     if (auswahl == 0)
                     {
 
@@ -105,7 +111,7 @@ namespace NbaFantasyProjekt
                             }
                             else
                             {
-                                Console.ForegroundColor= ConsoleColor.Red;
+                                Console.ForegroundColor = ConsoleColor.Red;
                                 Console.WriteLine("Please provide only numbers");
                                 Console.ResetColor();
                                 Console.ReadKey();
@@ -231,7 +237,7 @@ namespace NbaFantasyProjekt
                                 Console.ForegroundColor = ConsoleColor.Red;
                                 Console.WriteLine("Please provide only numbers");
                                 Console.ResetColor();
-                                Console.ReadKey(); 
+                                Console.ReadKey();
 
                             }
                         }
@@ -286,17 +292,242 @@ namespace NbaFantasyProjekt
                             }
                         }
 
+                        //This will allow us to make sure no players are created with out a name
+                        if (name != null && name != "" && lastname != null && lastname != "")
+                        {
+
+
+                            int playerrank = 0;
+                            var player = new PlayerRank_Stats(playerrank, name, lastname, points, assists, rebounds, threes, steals, tunronvers, fGpercent, fTpercent);
+
+
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.WriteLine("Player saved successfully!");
+                            Console.ResetColor();
+
+
+
+                        }
+                        else
+                        {
+                            Console.Clear();
+                            Console.WriteLine("Please fill in name and last name");
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.ResetColor();
+
+
+
+                        }
 
 
 
 
 
                     }
+
+                    // here we are creating the teams that will part take of the draft
+                    else if (auswahl == 1)
+                    {
+                        int numberofteams;
+                        bool check;
+                        do
+                        {
+
+                            Console.Clear();
+                            Console.WriteLine("Please input how many teams will be in your league. ");
+                            check = int.TryParse(Console.ReadLine(), out numberofteams);
+                            if (!check)
+                            {
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.WriteLine("Please provide only numbers");
+                                Console.ResetColor();
+                                Console.ReadKey();
+                            }
+                        }
+                        while (!check);
+                        int i = 1;
+                        //This loops helps us to start creating the teams and it will only loop the ammount of times the number of teams.
+                        do
+
+                        {
+
+                            while (true)
+                            {
+                                int teamnumber;
+                                Console.WriteLine("Team number:");
+                                var teamnumberInput = Console.ReadLine();
+                                if (int.TryParse(teamnumberInput, out teamnumber))
+
+                                {
+                                    break;
+                                }
+                                else
+                                {
+                                    Console.ForegroundColor = ConsoleColor.Red;
+                                    Console.WriteLine("Please provide only numbers");
+                                    Console.ResetColor();
+                                    Console.ReadKey();
+                                }
+                            }
+
+                            Console.WriteLine("Team Name");
+                            var teamname = Console.ReadLine();
+
+                            Console.WriteLine("Team Owner");
+                            var teamowner = Console.ReadLine();
+
+
+
+
+
+
+
+
+
+                            if (teamname != null && teamname != "" && teamowner != null && teamowner != "")
+                            {
+
+                                int teamnumber = 0;
+                                var team = new Teams(teamnumber, teamname, teamowner);
+                                teams.Add(team);
+                                Console.WriteLine("Team Saved is saved");
+                                Console.ForegroundColor = ConsoleColor.Green;
+                                Console.WriteLine("Team saved successfully!");
+                                Console.ResetColor();
+                                i++;
+
+                            }
+                            else
+                            {
+                                Console.Clear();
+                                Console.WriteLine("Please fill in Team number, Team Name, Team owner");
+
+
+
+                            }
+
+                        }
+
+                        while (i <= numberofteams);
+                    }
+
+                    else if (auswahl == 2) ;
+                    {
+                        int TeamsComingToodraft;
+
+                        bool check;
+                        do
+                        {
+
+                            Console.Clear();
+                            Console.WriteLine("Please input how many teams will be taking part in the draft. ");
+                            check = int.TryParse(Console.ReadLine(), out TeamsComingToodraft);
+                            if (!check)
+                            {
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.WriteLine("Please provide only numbers");
+                                Console.ResetColor();
+                                Console.ReadKey();
+                            }
+                        }
+                        while (!check);
+                        // Assume you read TeamsComingToodraft from user input and validated it.
+
+                        int[] draft = new int[TeamsComingToodraft];
+
+                        // Initialize array with 1 to TeamsComingToodraft
+                        for (int i = 0; i < TeamsComingToodraft; i++)
+                        {
+                            draft[i] = i + 1;
+                        }
+
+                        Random rnd = new Random();
+
+                        // This was done with perplexity 
+                        for (int i = TeamsComingToodraft - 1; i > 0; i--)
+                        {
+                            int j = rnd.Next(i + 1);
+                            int temp = draft[i];
+                            draft[i] = draft[j];
+                            draft[j] = temp;
+                        }
+
+                        // Now print the unique random order without duplicates
+                        Console.Clear();
+                        for (int i = 0; i < TeamsComingToodraft; i++)
+                        {
+                            Console.WriteLine(draft[i]);
+                        }
+                        Console.ReadKey();
+
+                        Console.WriteLine("Please write the Name of the draft");
+                        var draftname= Console.ReadLine();
+
+                        Console.WriteLine("Please write the order of the draft starting from the number on top");
+                        var drafroder= Console.ReadLine();
+
+                        if (draftname != null && draftname != "" && drafroder != null && drafroder != "")
+                        {
+
+                            var draftx = new Draft(draftname, drafroder);
+                            drafts.Add(draftx);
+                            Console.WriteLine("Draft order is saved");
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.WriteLine("Team saved successfully!");
+                            Console.ResetColor();
+                            Console.ReadKey();
+                            
+
+                        }
+                        else
+                        {
+                            Console.Clear();
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("Please fill in Draft name and Draft order");
+
+                        }
+
+
+
+                    }
+
+
                 }
+
+
+
 
             }
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
