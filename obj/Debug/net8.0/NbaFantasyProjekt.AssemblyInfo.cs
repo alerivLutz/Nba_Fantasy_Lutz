@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("NbaFantasyProjekt")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4d3cc641afd5f5ec476a20dcd53e978c0452e7e3")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1fbb9223b88a872d6d52ed488a2326193910d9b2")]
 [assembly: System.Reflection.AssemblyProductAttribute("NbaFantasyProjekt")]
 [assembly: System.Reflection.AssemblyTitleAttribute("NbaFantasyProjekt")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

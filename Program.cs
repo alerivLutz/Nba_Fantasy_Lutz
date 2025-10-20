@@ -41,7 +41,7 @@ namespace NbaFantasyProjekt
             Console.ReadKey();
 
             Menu();
-
+            string draftx;
         }
 
         public static void Menu()
@@ -320,8 +320,8 @@ namespace NbaFantasyProjekt
                             {
 
 
-                                int playerrank = 0;
-                                var player = new PlayerRank_Stats(playerrank, name ?? "", lastname ?? "", points, assists, rebounds, threes, steals, tunronvers, fGpercent, fTpercent);
+                                int playerrank = rank;
+                                var player = new PlayerRank_Stats(playerrank, name, lastname, points, assists, rebounds, threes, steals, blocks, tunronvers, fGpercent, fTpercent);
                                 players.Add(player);
 
 
@@ -537,28 +537,45 @@ namespace NbaFantasyProjekt
                     }
                     void DraftStart()
                     {
+
+
+
+
+
                         Console.WriteLine("Lets start the draft!");
                         Console.WriteLine("All players \n\n");
+                        Console.WriteLine("Rank\tName\tLast Name\tPoints\tAssists\tRebounds\tThrees\tSteals\tBlocks\tT.O\tFG%\tFT%");
 
-                        for (int i = 0; i < players.Count(); i++)
+                        for (int i = 0; i < players.Count; i++)
                         {
-
-                            Console.WriteLine($"{i} \t {players[i].PlayerRank} \t {players[i].Name} \t {players[i].LastName} \t {players[i].Points} \t {players[i].Assists} \t {players[i].Rebounds} \t {players[i].Threes} \t {players[i].Steals} \t {players[i].Turnovers} \t {players[i].FGpercent} \t{players[i].FTpercent}");
-
-
-
+                            Console.WriteLine(
+                                $"{players[i].PlayerRank}\t" +
+                                $"{players[i].Name}\t" +
+                                $"{players[i].LastName}\t\t" +
+                                $"{players[i].Points}\t" +
+                                $"{players[i].Assists}\t" +
+                                $"{players[i].Rebounds}\t\t" +
+                                $"{players[i].Threes}\t" +
+                                $"{players[i].Steals}\t" +
+                                $"{players[i].Blocks}\t" +
+                                $"{players[i].Turnovers}\t" +
+                                $"{players[i].FGpercent}\t" +
+                                $"{players[i].FTpercent}"
+                            );
                         }
-                        Console.ReadKey();
+
                     }
+                    Console.ReadKey();
                 }
-
-
-
-
-
             }
+
+
+
+
+
         }
     }
+
 }
 
 

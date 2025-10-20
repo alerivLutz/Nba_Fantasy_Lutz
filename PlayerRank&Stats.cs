@@ -8,6 +8,8 @@ namespace NbaFantasyProjekt
 {
     internal class PlayerRank_Stats
     {
+     
+
         public int PlayerRank { get; set; }
         public string Name { get; set; }
         public string LastName { get; set; }
@@ -32,7 +34,7 @@ namespace NbaFantasyProjekt
             Name = name;
             LastName = lastname;
             Points = points;
-            Assits = assists;
+            Assists = assists;
             Rebounds = rebounds;
             Threes = threes;
             Steals = steals;
@@ -86,21 +88,29 @@ namespace NbaFantasyProjekt
             TeamName = teamname;
             TeamOwner = teamowner;
         }
-          static int[] draftOrder;
+        static int[] draftOrder;
     }
-    internal class Draft 
-    { 
-    string Draftorder { get; set; }
+    internal class Draft
+    {
+        internal readonly object DraftName;
+
+        string Draftorder { get; set; }
         string Draftname { get; set; }
 
 
-        public Draft( string draftname, string draftorder)
+        public Draft(string draftname, string draftorder)
 
         {
             Draftname = draftname;
             Draftorder = draftorder;
         }
+
+       
+
+
+
     }
+
 
 }
 
