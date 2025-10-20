@@ -537,6 +537,11 @@ namespace NbaFantasyProjekt
                     }
                     void DraftStart()
                     {
+                        foreach (var draft in drafts)
+                        {
+                            Console.WriteLine($"Draft Name: {draft.DraftName}, Draft Order: {draft.DraftOrder}");
+                        }
+
 
 
 
