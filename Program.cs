@@ -89,245 +89,284 @@ namespace NbaFantasyProjekt
                 {
                     // Here is the code where we will add player to the data bank 
                     if (auswahl == 0)
+                        PlayerRankDatabase();
+
+
+                    // here we are creating the teams that will part take of the draft
+                    else if (auswahl == 1)
+                        TeamsCreation();
+
+                    else if (auswahl == 2)
+                        DraftLottery();
+
+                    else if (auswahl == 3)
+                        DraftStart();
+
+
+
+
+
+
+                    void PlayerRankDatabase()
+
+
                     {
-
-                        Console.Clear();
-
-                        Console.WriteLine("Lets create a Player! ");
-                        Thread.Sleep(2000);
-
-
-                        int rank;
-                        while (true)
+                        bool playercreation = true;
+                        do
                         {
                             Console.Clear();
-                            Console.WriteLine("Rank");
 
-                            var rankInput = Console.ReadLine();
+                            Console.WriteLine("Lets create a Player! ");
+                            Thread.Sleep(2000);
 
-                            if (int.TryParse(rankInput, out rank))
+
+                            int rank;
+                            while (true)
                             {
-                                break;
+                                Console.Clear();
+                                Console.WriteLine("Rank");
+
+                                var rankInput = Console.ReadLine();
+
+                                if (int.TryParse(rankInput, out rank))
+                                {
+                                    break;
+                                }
+                                else
+                                {
+                                    Console.ForegroundColor = ConsoleColor.Red;
+                                    Console.WriteLine("Please provide only numbers");
+                                    Console.ResetColor();
+                                    Console.ReadKey();
+
+                                }
                             }
-                            else
+                            Console.Clear();
+
+
+
+                            Console.WriteLine("Name");
+                            var name = Console.ReadLine();
+                            Console.Clear();
+
+                            Console.WriteLine("Last Name");
+                            var lastname = Console.ReadLine();
+                            Console.Clear();
+
+
+                            int points;
+                            while (true)
                             {
-                                Console.ForegroundColor = ConsoleColor.Red;
-                                Console.WriteLine("Please provide only numbers");
+                                Console.Clear();
+                                Console.WriteLine("Points");
+
+                                var pointsInput = Console.ReadLine();
+
+                                if (int.TryParse(pointsInput, out points))
+                                {
+                                    break;
+                                }
+                                else
+                                {
+                                    Console.ForegroundColor = ConsoleColor.Red;
+                                    Console.WriteLine("Please provide only numbers");
+                                    Console.ResetColor();
+                                    Console.ReadKey();
+
+                                }
+                            }
+
+                            int assists;
+                            while (true)
+                            {
+                                Console.Clear();
+                                Console.WriteLine("Assists");
+
+                                var assistsInput = Console.ReadLine();
+                                if (int.TryParse(assistsInput, out assists))
+                                {
+                                    break;
+                                }
+                                else
+                                {
+                                    Console.ForegroundColor = ConsoleColor.Red;
+                                    Console.WriteLine("Please provide only numbers");
+                                    Console.ResetColor();
+                                    Console.ReadKey();
+                                }
+                            }
+                            int rebounds;
+                            while (true)
+                            {
+                                Console.Clear();
+                                Console.WriteLine("Rebounds");
+
+                                var reboundsInput = Console.ReadLine();
+                                if (int.TryParse(reboundsInput, out rebounds))
+                                {
+                                    break;
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Please provide only numbers");
+                                }
+
+                            }
+                            int threes;
+                            Console.Clear();
+                            while (true)
+                            {
+                                Console.WriteLine("Threes");
+                                var threesInput = Console.ReadLine();
+                                if (int.TryParse(threesInput, out threes))
+                                {
+                                    break;
+                                }
+                                else
+                                {
+                                    Console.ForegroundColor = ConsoleColor.Red;
+                                    Console.WriteLine("Please provide only numbers");
+                                    Console.ResetColor();
+                                    Console.ReadKey();
+                                }
+                            }
+
+                            int steals;
+                            while (true)
+                            {
+                                Console.Clear();
+                                Console.WriteLine("Steals");
+                                var stealsInput = Console.ReadLine();
+                                if (int.TryParse(stealsInput, out steals))
+                                { break; }
+                                else
+                                {
+                                    Console.ForegroundColor = ConsoleColor.Red;
+                                    Console.WriteLine("Please provide only numbers");
+                                    Console.ResetColor();
+                                    Console.ReadKey();
+                                }
+                            }
+                            int blocks;
+                            while (true)
+                            {
+                                Console.Clear();
+                                Console.WriteLine("Blocks");
+                                var blocksInput = Console.ReadLine();
+                                if (int.TryParse(blocksInput, out blocks))
+                                { break; }
+                                else
+                                {
+                                    Console.ForegroundColor = ConsoleColor.Red;
+                                    Console.WriteLine("Please provide only numbers");
+                                    Console.ResetColor();
+                                    Console.ReadKey();
+
+                                }
+                            }
+                            int tunronvers;
+                            while (true)
+                            {
+                                Console.Clear();
+                                Console.WriteLine("Tunrovers");
+                                var tunronversInput = Console.ReadLine();
+                                if (int.TryParse(tunronversInput, out tunronvers))
+                                { break; }
+                                else
+                                {
+                                    Console.ForegroundColor = ConsoleColor.Red;
+                                    Console.WriteLine("Please provide only numbers");
+                                    Console.ResetColor();
+                                    Console.ReadKey();
+
+                                }
+                            }
+                            int fGpercent;
+                            while (true)
+                            {
+                                Console.Clear();
+                                Console.WriteLine("FG%");
+                                var fGpercentInput = Console.ReadLine();
+                                if (int.TryParse(fGpercentInput, out fGpercent))
+                                { break; }
+                                else
+                                {
+                                    Console.ForegroundColor = ConsoleColor.Red;
+                                    Console.WriteLine("Please provide only numbers");
+                                    Console.ResetColor();
+                                    Console.ReadKey();
+                                }
+                            }
+
+                            int fTpercent;
+                            while (true)
+                            {
+                                Console.Clear();
+                                Console.WriteLine("FT%");
+                                var tpercentInput = Console.ReadLine();
+                                if (int.TryParse(tpercentInput, out fTpercent))
+                                { break; }
+                                else
+                                {
+                                    Console.ForegroundColor = ConsoleColor.Red;
+                                    Console.WriteLine("Please provide only numbers");
+                                    Console.ResetColor();
+                                    Console.ReadKey();
+                                }
+                            }
+
+                            //This will allow us to make sure no players are created with out a name
+                            if (name != null && name != "" && lastname != null && lastname != "")
+                            {
+
+
+                                int playerrank = 0;
+                                var player = new PlayerRank_Stats(playerrank, name ?? "", lastname ?? "", points, assists, rebounds, threes, steals, tunronvers, fGpercent, fTpercent);
+                                players.Add(player);
+
+
+                                Console.ForegroundColor = ConsoleColor.Green;
+                                Console.WriteLine("Player saved successfully!");
                                 Console.ResetColor();
-                                Console.ReadKey();
-
-                            }
-                        }
-                        Console.Clear();
-
-
-
-                        Console.WriteLine("Name");
-                        var name = Console.ReadLine();
-                        Console.Clear();
-
-                        Console.WriteLine("Last Name");
-                        var lastname = Console.ReadLine();
-                        Console.Clear();
+                                Console.WriteLine("Would you like to add an other player?");
+                                Console.WriteLine("Y/N");
+                                string YN = Console.ReadLine();
+                                if (YN == "Y")
+                                {
+                                    playercreation = true;
+                                }
+                                else if (YN == "N")
+                                {
+                                    playercreation = false;
+                                }
 
 
-                        int points;
-                        while (true)
-                        {
-                            Console.Clear();
-                            Console.WriteLine("Points");
 
-                            var pointsInput = Console.ReadLine();
 
-                            if (int.TryParse(pointsInput, out points))
-                            {
-                                break;
                             }
                             else
                             {
+                                Console.Clear();
+                                Console.WriteLine("Please fill in name and last name");
                                 Console.ForegroundColor = ConsoleColor.Red;
-                                Console.WriteLine("Please provide only numbers");
                                 Console.ResetColor();
-                                Console.ReadKey();
+
+
 
                             }
-                        }
-
-                        int assists;
-                        while (true)
-                        {
-                            Console.Clear();
-                            Console.WriteLine("Assists");
-
-                            var assistsInput = Console.ReadLine();
-                            if (int.TryParse(assistsInput, out assists))
-                            {
-                                break;
-                            }
-                            else
-                            {
-                                Console.ForegroundColor = ConsoleColor.Red;
-                                Console.WriteLine("Please provide only numbers");
-                                Console.ResetColor();
-                                Console.ReadKey();
-                            }
-                        }
-                        int rebounds;
-                        while (true)
-                        {
-                            Console.Clear();
-                            Console.WriteLine("Rebounds");
-
-                            var reboundsInput = Console.ReadLine();
-                            if (int.TryParse(reboundsInput, out rebounds))
-                            {
-                                break;
-                            }
-                            else
-                            {
-                                Console.WriteLine("Please provide only numbers");
-                            }
-
-                        }
-                        int threes;
-                        Console.Clear();
-                        while (true)
-                        {
-                            Console.WriteLine("Threes");
-                            var threesInput = Console.ReadLine();
-                            if (int.TryParse(threesInput, out threes))
-                            {
-                                break;
-                            }
-                            else
-                            {
-                                Console.ForegroundColor = ConsoleColor.Red;
-                                Console.WriteLine("Please provide only numbers");
-                                Console.ResetColor();
-                                Console.ReadKey();
-                            }
-                        }
-
-                        int steals;
-                        while (true)
-                        {
-                            Console.Clear();
-                            Console.WriteLine("Steals");
-                            var stealsInput = Console.ReadLine();
-                            if (int.TryParse(stealsInput, out steals))
-                            { break; }
-                            else
-                            {
-                                Console.ForegroundColor = ConsoleColor.Red;
-                                Console.WriteLine("Please provide only numbers");
-                                Console.ResetColor();
-                                Console.ReadKey();
-                            }
-                        }
-                        int blocks;
-                        while (true)
-                        {
-                            Console.Clear();
-                            Console.WriteLine("Blocks");
-                            var blocksInput = Console.ReadLine();
-                            if (int.TryParse(blocksInput, out blocks))
-                            { break; }
-                            else
-                            {
-                                Console.ForegroundColor = ConsoleColor.Red;
-                                Console.WriteLine("Please provide only numbers");
-                                Console.ResetColor();
-                                Console.ReadKey();
-
-                            }
-                        }
-                        int tunronvers;
-                        while (true)
-                        {
-                            Console.Clear();
-                            Console.WriteLine("Tunrovers");
-                            var tunronversInput = Console.ReadLine();
-                            if (int.TryParse(tunronversInput, out tunronvers))
-                            { break; }
-                            else
-                            {
-                                Console.ForegroundColor = ConsoleColor.Red;
-                                Console.WriteLine("Please provide only numbers");
-                                Console.ResetColor();
-                                Console.ReadKey();
-
-                            }
-                        }
-                        int fGpercent;
-                        while (true)
-                        {
-                            Console.Clear();
-                            Console.WriteLine("FG%");
-                            var fGpercentInput = Console.ReadLine();
-                            if (int.TryParse(fGpercentInput, out fGpercent))
-                            { break; }
-                            else
-                            {
-                                Console.ForegroundColor = ConsoleColor.Red;
-                                Console.WriteLine("Please provide only numbers");
-                                Console.ResetColor();
-                                Console.ReadKey();
-                            }
-                        }
-
-                        int fTpercent;
-                        while (true)
-                        {
-                            Console.Clear();
-                            Console.WriteLine("FT%");
-                            var tpercentInput = Console.ReadLine();
-                            if (int.TryParse(tpercentInput, out fTpercent))
-                            { break; }
-                            else
-                            {
-                                Console.ForegroundColor = ConsoleColor.Red;
-                                Console.WriteLine("Please provide only numbers");
-                                Console.ResetColor();
-                                Console.ReadKey();
-                            }
-                        }
-
-                        //This will allow us to make sure no players are created with out a name
-                        if (name != null && name != "" && lastname != null && lastname != "")
-                        {
-
-
-                            int playerrank = 0;
-                            var player = new PlayerRank_Stats(playerrank, name, lastname, points, assists, rebounds, threes, steals, tunronvers, fGpercent, fTpercent);
-
-
-                            Console.ForegroundColor = ConsoleColor.Green;
-                            Console.WriteLine("Player saved successfully!");
-                            Console.ResetColor();
 
 
 
-                        }
-                        else
-                        {
-                            Console.Clear();
-                            Console.WriteLine("Please fill in name and last name");
-                            Console.ForegroundColor = ConsoleColor.Red;
-                            Console.ResetColor();
-
-
-
-                        }
+                        } while (playercreation);
 
 
 
 
 
                     }
-
-                    // here we are creating the teams that will part take of the draft
-                    else if (auswahl == 1)
+                    void TeamsCreation()
                     {
+
                         int numberofteams;
                         bool check;
                         do
@@ -410,8 +449,7 @@ namespace NbaFantasyProjekt
 
                         while (i <= numberofteams);
                     }
-
-                    else if (auswahl == 2) ;
+                    void DraftLottery()
                     {
                         int TeamsComingToodraft;
 
@@ -431,11 +469,11 @@ namespace NbaFantasyProjekt
                             }
                         }
                         while (!check);
-                        // Assume you read TeamsComingToodraft from user input and validated it.
+
 
                         int[] draft = new int[TeamsComingToodraft];
 
-                        // Initialize array with 1 to TeamsComingToodraft
+
                         for (int i = 0; i < TeamsComingToodraft; i++)
                         {
                             draft[i] = i + 1;
@@ -443,7 +481,7 @@ namespace NbaFantasyProjekt
 
                         Random rnd = new Random();
 
-                        // This was done with perplexity 
+                        // This part of the code i did not know how to genrate it so went to chatgpt 
                         for (int i = TeamsComingToodraft - 1; i > 0; i--)
                         {
                             int j = rnd.Next(i + 1);
@@ -452,47 +490,68 @@ namespace NbaFantasyProjekt
                             draft[j] = temp;
                         }
 
-                        // Now print the unique random order without duplicates
-                        Console.Clear();
+                        // Here is now my own code 
+
+                        int x = 1;
                         for (int i = 0; i < TeamsComingToodraft; i++)
                         {
-                            Console.WriteLine(draft[i]);
+                            Console.WriteLine($" Team {x++}-{draft[i]}");
                         }
                         Console.ReadKey();
 
-                        Console.WriteLine("Please write the Name of the draft");
-                        var draftname= Console.ReadLine();
-
-                        Console.WriteLine("Please write the order of the draft starting from the number on top");
-                        var drafroder= Console.ReadLine();
-
-                        if (draftname != null && draftname != "" && drafroder != null && drafroder != "")
+                        while (true)
                         {
+                            Console.WriteLine("Please write the Name of the draft");
+                            var draftname = Console.ReadLine();
 
-                            var draftx = new Draft(draftname, drafroder);
-                            drafts.Add(draftx);
-                            Console.WriteLine("Draft order is saved");
-                            Console.ForegroundColor = ConsoleColor.Green;
-                            Console.WriteLine("Team saved successfully!");
-                            Console.ResetColor();
-                            Console.ReadKey();
-                            
+                            Console.WriteLine("Please write the order of the draft starting from the number on top");
+                            var drafroder = Console.ReadLine();
 
+                            if (draftname != null && draftname != "" && drafroder != null && drafroder != "")
+                            {
+
+                                var draftx = new Draft(draftname, drafroder);
+                                drafts.Add(draftx);
+                                Console.WriteLine("Draft order is saved");
+                                Console.ForegroundColor = ConsoleColor.Green;
+                                Console.WriteLine("Team saved successfully!");
+                                Console.ResetColor();
+                                Console.ReadKey();
+                                break;
+
+                            }
+                            else
+                            {
+                                Console.Clear();
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.WriteLine("Please fill in Draft name and Draft order");
+                                Console.ResetColor();
+                                Console.ReadKey();
+
+                            }
                         }
-                        else
-                        {
-                            Console.Clear();
-                            Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine("Please fill in Draft name and Draft order");
 
-                        }
 
 
 
                     }
+                    void DraftStart()
+                    {
+                        Console.WriteLine("Lets start the draft!");
+                        Console.WriteLine("All players \n\n");
+
+                        for (int i = 0; i < players.Count(); i++)
+                        {
+
+                            Console.WriteLine($"{i} \t {players[i].PlayerRank} \t {players[i].Name} \t {players[i].LastName} \t {players[i].Points} \t {players[i].Assists} \t {players[i].Rebounds} \t {players[i].Threes} \t {players[i].Steals} \t {players[i].Turnovers} \t {players[i].FGpercent} \t{players[i].FTpercent}");
 
 
+
+                        }
+                        Console.ReadKey();
+                    }
                 }
+
 
 
 
