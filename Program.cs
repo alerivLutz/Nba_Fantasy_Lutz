@@ -2,6 +2,9 @@
 using System.Data;
 using System.Drawing;
 using System.Xml.Linq;
+using System.IO;
+using System.Text.Json;
+using System.Security.Cryptography.X509Certificates;
 
 namespace NbaFantasyProjekt
 {
@@ -9,6 +12,10 @@ namespace NbaFantasyProjekt
     {
         static void Main(string[] args)
         {
+            Console.ReadKey();
+            List<PlayerRank_Stats> players = LoadPlayers();
+
+
             // This is our Welcoming screen where we will be trying to create an NBA logo.
 
             Console.ForegroundColor = ConsoleColor.Blue;
@@ -40,14 +47,15 @@ namespace NbaFantasyProjekt
 
             Console.ReadKey();
 
-            Menu();
+            Menu(players);
+
             string draftx;
         }
 
-        public static void Menu()
+        public static void Menu(List<PlayerRank_Stats> players)
 
         {
-            List<PlayerRank_Stats> players = new List<PlayerRank_Stats>();
+
             List<Teams> teams = new List<Teams>();
             List<Draft> drafts = new List<Draft>();
 
@@ -314,6 +322,8 @@ namespace NbaFantasyProjekt
                                     Console.ReadKey();
                                 }
                             }
+                            Console.WriteLine("Owner");
+                            var owner = Console.ReadLine();
 
                             //This will allow us to make sure no players are created with out a name
                             if (name != null && name != "" && lastname != null && lastname != "")
@@ -321,8 +331,9 @@ namespace NbaFantasyProjekt
 
 
                                 int playerrank = rank;
-                                var player = new PlayerRank_Stats(playerrank, name, lastname, points, assists, rebounds, threes, steals, blocks, tunronvers, fGpercent, fTpercent);
+                                var player = new PlayerRank_Stats(playerrank, name, lastname, points, assists, rebounds, threes, steals, blocks, tunronvers, fGpercent, fTpercent, owner);
                                 players.Add(player);
+                                SavePlayersToJson(players);
 
 
                                 Console.ForegroundColor = ConsoleColor.Green;
@@ -363,6 +374,13 @@ namespace NbaFantasyProjekt
 
 
 
+                    }
+                    void SavePlayersToJson(List<PlayerRank_Stats> players)
+                    {
+                        string filePath = "players.json";
+                        string json = JsonSerializer.Serialize(players, new JsonSerializerOptions { WriteIndented = true });
+                        File.WriteAllText(filePath, json);
+                        Console.WriteLine("Players successfully saved to JSON file!");
                     }
                     void TeamsCreation()
                     {
@@ -535,6 +553,7 @@ namespace NbaFantasyProjekt
 
 
                     }
+
                     void DraftStart()
                     {
                         foreach (var draft in drafts)
@@ -568,20 +587,93 @@ namespace NbaFantasyProjekt
                                 $"{players[i].FTpercent}"
                             );
                         }
+                        Console.WriteLine("\nEnter the player's rank:");
+
+                        if (int.TryParse(Console.ReadLine(), out int input) && input > 0 && input <= players.Count)
+                        {
+                            var selectedPlayer = players[input - 1];
+                            Console.WriteLine($"Selected: {selectedPlayer.Name} {selectedPlayer.LastName}");
+                            Console.WriteLine($"Current owner: {selectedPlayer.Owner}");
+
+                            Console.WriteLine("Enter new owner:");
+                            string newOwner = Console.ReadLine();
+                            if (!string.IsNullOrEmpty(newOwner))
+                            {
+                                selectedPlayer.Owner = newOwner;
+                                Console.WriteLine($"Owner updated to {selectedPlayer.Owner}.");
+                            }
+                            else
+                            {
+                                Console.WriteLine("Invalid input for owner.");
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid employee number.");
+                        }
+                        Console.ReadKey();
 
                     }
-                    Console.ReadKey();
+
+
+
+
+
+
+
                 }
+
+
             }
+        }
 
+        public static List<PlayerRank_Stats> LoadPlayers()
+        {
+            if (!File.Exists("players.json"))
+                return new List<PlayerRank_Stats>();
+            var json = File.ReadAllText("players.json");
+            return JsonSerializer.Deserialize<List<PlayerRank_Stats>>(json);
+        }
 
+        // Load teams list from JSON
+        public static List<Teams> LoadTeams()
+        {
+            if (!File.Exists("teams.json"))
+                return new List<Teams>();
+            var json = File.ReadAllText("teams.json");
+            return JsonSerializer.Deserialize<List<Teams>>(json);
+        }
 
+        // Save teams list to JSON
+        public static void SaveTeamsToJson(List<Teams> teams)
+        {
+            var json = JsonSerializer.Serialize(teams, new JsonSerializerOptions { WriteIndented = true });
+            File.WriteAllText("teams.json", json);
+        }
 
+        // Load drafts list from JSON
+        public static List<Draft> LoadDrafts()
+        {
+            if (!File.Exists("drafts.json"))
+                return new List<Draft>();
+            var json = File.ReadAllText("drafts.json");
+            return JsonSerializer.Deserialize<List<Draft>>(json);
+        }
 
+        // Save drafts list to JSON
+        public static void SaveDraftsToJson(List<Draft> drafts)
+        {
+            var json = JsonSerializer.Serialize(drafts, new JsonSerializerOptions { WriteIndented = true });
+            File.WriteAllText("drafts.json", json);
         }
     }
-
 }
+
+
+
+
+
+
 
 
 

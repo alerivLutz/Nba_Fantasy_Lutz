@@ -1,0 +1,18 @@
+[
+  {
+    "PlayerRank": 1,
+    "Name": "nikola",
+    "LastName": "jokic",
+    "Points": 1,
+    "Assists": 1,
+    "Rebounds": 1,
+    "Threes": 1,
+    "Steals": 1,
+    "Blocks": 1,
+    "Turnovers": 1,
+    "FGpercent": 1,
+    "FTpercent": 1,
+    "Owner": "",
+    "Status": true
+  }
+]

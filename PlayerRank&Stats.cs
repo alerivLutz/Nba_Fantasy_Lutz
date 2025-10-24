@@ -14,10 +14,11 @@
         public int Turnovers { get; set; }
         public int FGpercent { get; set; }
         public int FTpercent { get; set; }
+        public string Owner { get; set; }
         public bool Status { get; set; } = true;
 
         public PlayerRank_Stats(int playerRank, string name, string lastName, int points, int assists,
-            int rebounds, int threes, int steals, int blocks, int turnovers, int fgPercent, int ftPercent)
+            int rebounds, int threes, int steals, int blocks, int turnovers, int fgPercent, int ftPercent, string owner)
         {
             PlayerRank = playerRank;
             Name = name;
@@ -31,6 +32,9 @@
             Turnovers = turnovers;
             FGpercent = fgPercent;
             FTpercent = ftPercent;
+            Owner = owner;
+            
+
         }
     }
 
