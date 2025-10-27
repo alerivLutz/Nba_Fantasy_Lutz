@@ -18,13 +18,7 @@ namespace NbaFantasyProjekt
             List<Teams> teams = LoadTeams();
             Console.OutputEncoding = System.Text.Encoding.UTF8;
 
-            Thread.Sleep(500);
-            Console.WriteLine("                      🏀  ");
-            
-            Thread.Sleep(1000);
-            Console.WriteLine("                        🏀");
-            Console.Clear();
-            Console.ReadKey();
+
             
             
             
@@ -79,7 +73,7 @@ namespace NbaFantasyProjekt
         {
 
                 " NBA Fanatasy 🏀🏀🏀",
-            "1. Create a player data rank",
+            "1. Player Database",
             "2. How many teams will be playing in the League",
             "3. Get draft order",
             "4. Start the draft!",
