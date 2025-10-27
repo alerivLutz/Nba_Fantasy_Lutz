@@ -14,8 +14,23 @@ namespace NbaFantasyProjekt
         {
             Console.ReadKey();
             List<PlayerRank_Stats> players = LoadPlayers();
+            List<Draft> drafts = LoadDrafts();
+            List<Teams> teams = LoadTeams();
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
 
-
+            Thread.Sleep(500);
+            Console.WriteLine("                      🏀  ");
+            
+            Thread.Sleep(1000);
+            Console.WriteLine("                        🏀");
+            Console.Clear();
+            Console.ReadKey();
+            
+            
+            
+            
+            
+            
             // This is our Welcoming screen where we will be trying to create an NBA logo.
 
             Console.ForegroundColor = ConsoleColor.Blue;
@@ -44,28 +59,31 @@ namespace NbaFantasyProjekt
             Console.WriteLine("D   D  R  R   A     A F        T  ");
             Console.WriteLine("DDDD   R   R  A     A F        T  ");
             Console.ResetColor();
+       
 
             Console.ReadKey();
 
-            Menu(players);
+            Menu(players, teams, drafts);
 
-            string draftx;
+            
         }
 
-        public static void Menu(List<PlayerRank_Stats> players)
+        public static void Menu(List<PlayerRank_Stats> players, List<Teams> teams, List<Draft> drafts)
 
         {
 
-            List<Teams> teams = new List<Teams>();
-            List<Draft> drafts = new List<Draft>();
+
 
             int auswahl = 0;
             List<string> options = new List<string>()
         {
+
+                " NBA Fanatasy 🏀🏀🏀",
             "1. Create a player data rank",
             "2. How many teams will be playing in the League",
             "3. Get draft order",
             "4. Start the draft!",
+            "5. Exit"
 
         };
             while (true)
@@ -96,19 +114,22 @@ namespace NbaFantasyProjekt
                 if (key == ConsoleKey.Enter)
                 {
                     // Here is the code where we will add player to the data bank 
-                    if (auswahl == 0)
+                    if (auswahl == 1)
                         PlayerRankDatabase();
 
 
                     // here we are creating the teams that will part take of the draft
-                    else if (auswahl == 1)
+                    else if (auswahl == 2)
                         TeamsCreation();
 
-                    else if (auswahl == 2)
+                    else if (auswahl == 3)
                         DraftLottery();
 
-                    else if (auswahl == 3)
+                    else if (auswahl == 4)
                         DraftStart();
+                    else if (auswahl == 5)
+                        break;
+
 
 
 
@@ -118,6 +139,38 @@ namespace NbaFantasyProjekt
                     void PlayerRankDatabase()
 
 
+                    {
+                        Console.Clear();
+
+                        Console.WriteLine("Please press the following key to navigate in the menu");
+                        Console.WriteLine("(1)\t➕ Add Players to the data base.");
+                        Console.WriteLine("(2)\t❌ Remove players from the data base.");
+                        Console.WriteLine("(3)\t🔙 Return to the main menu.");
+                        var input = Console.ReadKey();
+
+                        Console.Clear();
+
+                        switch (input.KeyChar)
+                        {
+
+                            case '1':
+                                PLayerAdd();
+                                break;
+
+                            case '2':
+                                RemovePlayer();
+                                break;
+                            case '3':
+                                return;
+
+
+                        }
+                    }
+
+
+
+
+                    void PLayerAdd()
                     {
                         bool playercreation = true;
                         do
@@ -329,6 +382,7 @@ namespace NbaFantasyProjekt
                             if (name != null && name != "" && lastname != null && lastname != "")
                             {
 
+                                // unsingedint googled it so we dont have negative numbers
 
                                 int playerrank = rank;
                                 var player = new PlayerRank_Stats(playerrank, name, lastname, points, assists, rebounds, threes, steals, blocks, tunronvers, fGpercent, fTpercent, owner);
@@ -375,16 +429,84 @@ namespace NbaFantasyProjekt
 
 
                     }
-                    void SavePlayersToJson(List<PlayerRank_Stats> players)
+                    void RemovePlayer()
                     {
-                        string filePath = "players.json";
-                        string json = JsonSerializer.Serialize(players, new JsonSerializerOptions { WriteIndented = true });
-                        File.WriteAllText(filePath, json);
-                        Console.WriteLine("Players successfully saved to JSON file!");
+                        Console.Clear();
+                        if (players.Count == 0)
+                        {
+                            Console.WriteLine("No players available to remove.");
+                            Console.ReadKey();
+                            return;
+                        }
+
+                        Console.WriteLine("Current Players:");
+                        for (int i = 0; i < players.Count; i++)
+                        {
+                            Console.WriteLine($"{i + 1}. {players[i].Name} {players[i].LastName} (Rank: {players[i].PlayerRank})");
+                        }
+
+                        Console.WriteLine("\nEnter the number of the player to remove:");
+                        if (int.TryParse(Console.ReadLine(), out int index) && index > 0 && index <= players.Count)
+                        {
+                            var playerToRemove = players[index - 1];
+                            Console.WriteLine($"Are you sure you want to delete {playerToRemove.Name} {playerToRemove.LastName}? (Y/N)");
+                            string confirm = Console.ReadLine();
+
+                            if (confirm?.ToUpper() == "Y")
+                            {
+                                players.RemoveAt(index - 1);
+                                SavePlayersToJson(players);
+                                Console.ForegroundColor = ConsoleColor.Green;
+                                Console.WriteLine("Player removed successfully!");
+                                Console.ResetColor();
+                            }
+                            else
+                            {
+                                Console.WriteLine("Player not removed.");
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid selection.");
+                        }
+
+                        Console.ReadKey();
                     }
+
+
+
                     void TeamsCreation()
                     {
+                        {
+                            Console.Clear();
+                            Console.WriteLine("Please press the following key to navigate the teams menu:");
+                            Console.WriteLine("(1)\t➕ Add a team.");
+                            Console.WriteLine("(2)\t❌ Remove a team.");
+                            Console.WriteLine("(3)\t🔙 Return to main menu.");
+                            var input = Console.ReadKey();
 
+                            Console.Clear();
+
+                            switch (input.KeyChar)
+                            {
+                                case '1':
+                                    AddTeam();
+                                    break;
+                                case '2':
+                                    RemoveTeam();
+                                    break;
+                                case '3':
+                                    return; // Returns to main menu
+                            }
+
+                        }
+
+                    }
+
+
+
+                    void AddTeam()
+                    {
                         int numberofteams;
                         bool check;
                         do
@@ -427,6 +549,7 @@ namespace NbaFantasyProjekt
                                 }
                             }
 
+
                             Console.WriteLine("Team Name");
                             var teamname = Console.ReadLine();
 
@@ -447,6 +570,7 @@ namespace NbaFantasyProjekt
                                 int teamnumber = 0;
                                 var team = new Teams(teamnumber, teamname, teamowner);
                                 teams.Add(team);
+                                SaveTeamsToJson(teams);
                                 Console.WriteLine("Team Saved is saved");
                                 Console.ForegroundColor = ConsoleColor.Green;
                                 Console.WriteLine("Team saved successfully!");
@@ -467,7 +591,79 @@ namespace NbaFantasyProjekt
 
                         while (i <= numberofteams);
                     }
+                    void RemoveTeam()
+                    {
+                        Console.Clear();
+                        if (teams.Count == 0)
+                        {
+                            Console.WriteLine("No teams available to remove.");
+                            Console.ReadKey();
+                            return;
+                        }
+
+                        Console.WriteLine("Current Teams:");
+                        for (int i = 0; i < teams.Count; i++)
+                        {
+                            Console.WriteLine($"{i + 1}. {teams[i].TeamName} (Owner: {teams[i].TeamOwner})");
+                        }
+
+                        Console.WriteLine("\nEnter the number of the team to remove:");
+                        if (int.TryParse(Console.ReadLine(), out int index) && index > 0 && index <= teams.Count)
+                        {
+                            var teamToRemove = teams[index - 1];
+                            Console.WriteLine($"Are you sure you want to delete {teamToRemove.TeamName}? (Y/N)");
+                            string confirm = Console.ReadLine();
+
+                            if (confirm?.ToUpper() == "Y")
+                            {
+                                teams.RemoveAt(index - 1);
+                                SaveTeamsToJson(teams);
+                                Console.ForegroundColor = ConsoleColor.Green;
+                                Console.WriteLine("Team removed successfully!");
+                                Console.ResetColor();
+                            }
+                            else
+                            {
+                                Console.WriteLine("Team not removed.");
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid selection.");
+                        }
+
+                        Console.ReadKey();
+                    }
+
+
+
+
                     void DraftLottery()
+                    {
+
+                        Console.Clear();
+                        Console.WriteLine("Please press the following key to navigate the drafts menu:");
+                        Console.WriteLine("(1)\t➕ Add a draft.");
+                        Console.WriteLine("(2)\t❌ Remove a draft.");
+                        Console.WriteLine("(3)\t🔙 Return to main menu.");
+                        var input = Console.ReadKey();
+
+                        Console.Clear();
+
+                        switch (input.KeyChar)
+                        {
+                            case '1':
+                                AddDraft();
+                                break;
+                            case '2':
+                                RemoveDraft();
+                                break;
+                            case '3':
+                                return; // Returns to main menu
+                        }
+
+                    }
+                    void AddDraft()
                     {
                         int TeamsComingToodraft;
 
@@ -530,6 +726,7 @@ namespace NbaFantasyProjekt
 
                                 var draftx = new Draft(draftname, drafroder);
                                 drafts.Add(draftx);
+                                SaveDraftsToJson(drafts);
                                 Console.WriteLine("Draft order is saved");
                                 Console.ForegroundColor = ConsoleColor.Green;
                                 Console.WriteLine("Team saved successfully!");
@@ -548,17 +745,61 @@ namespace NbaFantasyProjekt
 
                             }
                         }
-
-
-
-
                     }
+                    void RemoveDraft()
+                    {
+                        Console.Clear();
+                        if (drafts.Count == 0)
+                        {
+                            Console.WriteLine("No drafts available to remove.");
+                            Console.ReadKey();
+                            return;
+                        }
+
+                        Console.WriteLine("Current Drafts:");
+                        for (int i = 0; i < drafts.Count; i++)
+                        {
+                            Console.WriteLine($"{i + 1}. {drafts[i].DraftName} - Order: {drafts[i].DraftOrder}");
+                        }
+
+                        Console.WriteLine("\nEnter the number of the draft to remove:");
+                        if (int.TryParse(Console.ReadLine(), out int index) && index > 0 && index <= drafts.Count)
+                        {
+                            var draftToRemove = drafts[index - 1];
+                            Console.WriteLine($"Are you sure you want to delete draft '{draftToRemove.DraftName}'? (Y/N)");
+                            string confirm = Console.ReadLine();
+
+                            if (confirm?.ToUpper() == "Y")
+                            {
+                                drafts.RemoveAt(index - 1);
+                                SaveDraftsToJson(drafts);
+                                Console.ForegroundColor = ConsoleColor.Green;
+                                Console.WriteLine("Draft removed successfully!");
+                                Console.ResetColor();
+                            }
+                            else
+                            {
+                                Console.WriteLine("Draft not removed.");
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid selection.");
+                        }
+
+                        Console.ReadKey();
+                    }
+
+
+
 
                     void DraftStart()
                     {
                         foreach (var draft in drafts)
                         {
-                            Console.WriteLine($"Draft Name: {draft.DraftName}, Draft Order: {draft.DraftOrder}");
+                            Console.WriteLine($"\t\tDraft Name: {draft.DraftName}");
+
+                            Console.WriteLine($"\t\tDraft Order: {draft.DraftOrder}");
                         }
 
 
@@ -614,18 +855,45 @@ namespace NbaFantasyProjekt
                         Console.ReadKey();
 
                     }
-
-
-
-
-
-
-
+                    void Animation()
+                    {
+                        Console.WriteLine();
+                        
+                        
+                        }
                 }
 
 
+
             }
+            void SavePlayersToJson(List<PlayerRank_Stats> players)
+            {
+                string filePath = "players.json";
+                string json = JsonSerializer.Serialize(players, new JsonSerializerOptions { WriteIndented = true });
+                File.WriteAllText(filePath, json);
+                Console.WriteLine("Players successfully saved to JSON file!");
+            }
+            void SaveDraftsToJson(List<Draft> drafts)
+            {
+                string filePath = "drafts.json";
+                string json = JsonSerializer.Serialize(drafts, new JsonSerializerOptions { WriteIndented = true });
+                File.WriteAllText(filePath, json);
+                Console.WriteLine("Drafts successfully saved to JSON file!");
+            }
+            void SaveTeamsToJson(List<Teams> teams)
+            {
+                string filePath = "teams.json";
+                string json = JsonSerializer.Serialize(teams, new JsonSerializerOptions { WriteIndented = true });
+                File.WriteAllText(filePath, json);
+                Console.WriteLine("Teams successfully saved to JSON file!");
+            }
+
+
+
+
         }
+
+
 
         public static List<PlayerRank_Stats> LoadPlayers()
         {
@@ -668,39 +936,3 @@ namespace NbaFantasyProjekt
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
