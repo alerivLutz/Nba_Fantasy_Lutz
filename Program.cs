@@ -19,12 +19,12 @@ namespace NbaFantasyProjekt
             Console.OutputEncoding = System.Text.Encoding.UTF8;
 
 
-            
-            
-            
-            
-            
-            
+
+
+
+
+
+
             // This is our Welcoming screen where we will be trying to create an NBA logo.
 
             Console.ForegroundColor = ConsoleColor.Blue;
@@ -53,13 +53,13 @@ namespace NbaFantasyProjekt
             Console.WriteLine("D   D  R  R   A     A F        T  ");
             Console.WriteLine("DDDD   R   R  A     A F        T  ");
             Console.ResetColor();
-       
+
 
             Console.ReadKey();
 
             Menu(players, teams, drafts);
 
-            
+
         }
 
         public static void Menu(List<PlayerRank_Stats> players, List<Teams> teams, List<Draft> drafts)
@@ -789,103 +789,177 @@ namespace NbaFantasyProjekt
 
                     void DraftStart()
                     {
-                        foreach (var draft in drafts)
-                        {
-                            Console.WriteLine($"\t\tDraft Name: {draft.DraftName}");
+                        Console.Clear();
+                        Console.WriteLine("Please press the following key to navigate the drafts menu:");
+                        Console.WriteLine("(1)\t🎉▶️ START draft.");
+                        Console.WriteLine("(2)\t👀 View Teams");
+                        Console.WriteLine("(3)\t🔙 Return to main menu.");
+                        var input = Console.ReadKey();
 
-                            Console.WriteLine($"\t\tDraft Order: {draft.DraftOrder}");
+                        Console.Clear();
+
+                        switch (input.KeyChar)
+                        {
+                            case '1':
+                                StartDraft();
+                                break;
+                            case '2':
+                                ViewDraft();
+                                break;
+                            case '3':
+                                return; // Returns to main menu
                         }
 
 
-
-
-
-
-                        Console.WriteLine("Lets start the draft!");
-                        Console.WriteLine("All players \n\n");
-                        Console.WriteLine("Rank\tName\tLast Name\tPoints\tAssists\tRebounds\tThrees\tSteals\tBlocks\tT.O\tFG%\tFT%");
-
-                        for (int i = 0; i < players.Count; i++)
+                        void StartDraft()
                         {
-                            Console.WriteLine(
-                                $"{players[i].PlayerRank}\t" +
-                                $"{players[i].Name}\t" +
-                                $"{players[i].LastName}\t\t" +
-                                $"{players[i].Points}\t" +
-                                $"{players[i].Assists}\t" +
-                                $"{players[i].Rebounds}\t\t" +
-                                $"{players[i].Threes}\t" +
-                                $"{players[i].Steals}\t" +
-                                $"{players[i].Blocks}\t" +
-                                $"{players[i].Turnovers}\t" +
-                                $"{players[i].FGpercent}\t" +
-                                $"{players[i].FTpercent}"
-                            );
-                        }
-                        Console.WriteLine("\nEnter the player's rank:");
-
-                        if (int.TryParse(Console.ReadLine(), out int input) && input > 0 && input <= players.Count)
-                        {
-                            var selectedPlayer = players[input - 1];
-                            Console.WriteLine($"Selected: {selectedPlayer.Name} {selectedPlayer.LastName}");
-                            Console.WriteLine($"Current owner: {selectedPlayer.Owner}");
-
-                            Console.WriteLine("Enter new owner:");
-                            string newOwner = Console.ReadLine();
-                            if (!string.IsNullOrEmpty(newOwner))
+                            bool drafting = true;
+                            while (drafting)
                             {
-                                selectedPlayer.Owner = newOwner;
-                                Console.WriteLine($"Owner updated to {selectedPlayer.Owner}.");
-                            }
-                            else
-                            {
-                                Console.WriteLine("Invalid input for owner.");
-                            }
-                        }
-                        else
-                        {
-                            Console.WriteLine("Invalid employee number.");
-                        }
-                        Console.ReadKey();
+                                foreach (var draft in drafts)
 
+                                {
+                                    Console.WriteLine($"\t\tDraft Name: {draft.DraftName}");
+
+                                    Console.WriteLine($"\t\tDraft Order: {draft.DraftOrder}");
+                                }
+
+
+
+
+
+
+                                Console.WriteLine("Lets start the draft!");
+                                Console.WriteLine("All players \n\n");
+                                Console.WriteLine("Rank\tName\tLast Name\tPoints\tAssists\tRebounds\tThrees\tSteals\tBlocks\tT.O\tFG%\tFT%");
+
+                                var availablePlayers = players.Where(p => p.Status).ToList();
+
+                                for (int i = 0; i < availablePlayers.Count; i++)
+
+                                {
+                                    var p = availablePlayers[i];
+                                    Console.WriteLine(
+                                        $"{players[i].PlayerRank}\t" +
+                                        $"{players[i].Name}\t" +
+                                        $"{players[i].LastName}\t\t" +
+                                        $"{players[i].Points}\t" +
+                                        $"{players[i].Assists}\t" +
+                                        $"{players[i].Rebounds}\t\t" +
+                                        $"{players[i].Threes}\t" +
+                                        $"{players[i].Steals}\t" +
+                                        $"{players[i].Blocks}\t" +
+                                        $"{players[i].Turnovers}\t" +
+                                        $"{players[i].FGpercent}\t" +
+                                        $"{players[i].FTpercent}"
+                                    );
+                                }
+                                Console.WriteLine("\nEnter the player's rank:");
+
+                                if (int.TryParse(Console.ReadLine(), out int input))
+                                {
+                                    var selectedPlayer = availablePlayers.FirstOrDefault(p => p.PlayerRank == input);
+                                    if (selectedPlayer != null)
+                                    {
+
+                                        Console.WriteLine($"Selected: {selectedPlayer.Name} {selectedPlayer.LastName}");
+                                    Console.WriteLine($"Current owner: {selectedPlayer.Owner}");
+
+                                    Console.WriteLine("Enter new owner:");
+                                    string newOwner = Console.ReadLine();
+                                    if (!string.IsNullOrEmpty(newOwner))
+                                    {
+                                        selectedPlayer.Owner = newOwner;
+                                        selectedPlayer.Status = false;
+                                        Console.WriteLine($"Owner updated to {selectedPlayer.Owner}.");
+                                        Console.Clear();
+                                        Console.WriteLine("Draft another player? (Y/N)");
+                                        string draftMore = Console.ReadLine();
+                                        if (draftMore?.Trim().ToUpper() != "Y")
+                                        {
+                                            drafting = false; // exit loop if not 'Y'
+                                        }
+                                     
+                                    }
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Invalid input for owner.");
+                                    }
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Invalid player rank or player already drafted.");
+                                }
+                            }
+
+                        }
+
+
+
+
+
+                        void ViewDraft()
+                        {
+                            void ListPlayersByOwner(List<PlayerRank_Stats> players, List<Teams> teams)
+                            {
+                                var grouped = players
+                                    .OrderBy(p => p.Owner)
+                                    .GroupBy(p => p.Owner);
+
+                                foreach (var group in grouped)
+                                {
+                                    // Find the team for this owner
+                                    var team = teams.FirstOrDefault(t => t.TeamOwner == group.Key);
+                                    string teamName = team != null ? team.TeamName : "(No Team)";
+
+                                    Console.WriteLine($"Team: {teamName} | Owner: {group.Key}");
+                                    foreach (var player in group)
+                                    {
+                                        Console.WriteLine($"  {player.PlayerRank}. {player.Name} {player.LastName}");
+                                    }
+                                    Console.WriteLine();
+                                }
+                                Console.ReadKey();
+                            }
+
+                            ListPlayersByOwner(players, teams);
+                        }
                     }
-                    void Animation()
-                    {
-                        Console.WriteLine();
-                        
-                        
-                        }
+
                 }
 
 
 
-            }
-            void SavePlayersToJson(List<PlayerRank_Stats> players)
-            {
-                string filePath = "players.json";
-                string json = JsonSerializer.Serialize(players, new JsonSerializerOptions { WriteIndented = true });
-                File.WriteAllText(filePath, json);
-                Console.WriteLine("Players successfully saved to JSON file!");
-            }
-            void SaveDraftsToJson(List<Draft> drafts)
-            {
-                string filePath = "drafts.json";
-                string json = JsonSerializer.Serialize(drafts, new JsonSerializerOptions { WriteIndented = true });
-                File.WriteAllText(filePath, json);
-                Console.WriteLine("Drafts successfully saved to JSON file!");
-            }
-            void SaveTeamsToJson(List<Teams> teams)
-            {
-                string filePath = "teams.json";
-                string json = JsonSerializer.Serialize(teams, new JsonSerializerOptions { WriteIndented = true });
-                File.WriteAllText(filePath, json);
-                Console.WriteLine("Teams successfully saved to JSON file!");
-            }
+
+                void SavePlayersToJson(List<PlayerRank_Stats> players)
+                {
+                    string filePath = "players.json";
+                    string json = JsonSerializer.Serialize(players, new JsonSerializerOptions { WriteIndented = true });
+                    File.WriteAllText(filePath, json);
+                    Console.WriteLine("Players successfully saved to JSON file!");
+                }
+                void SaveDraftsToJson(List<Draft> drafts)
+                {
+                    string filePath = "drafts.json";
+                    string json = JsonSerializer.Serialize(drafts, new JsonSerializerOptions { WriteIndented = true });
+                    File.WriteAllText(filePath, json);
+                    Console.WriteLine("Drafts successfully saved to JSON file!");
+                }
+                void SaveTeamsToJson(List<Teams> teams)
+                {
+                    string filePath = "teams.json";
+                    string json = JsonSerializer.Serialize(teams, new JsonSerializerOptions { WriteIndented = true });
+                    File.WriteAllText(filePath, json);
+                    Console.WriteLine("Teams successfully saved to JSON file!");
+                }
 
 
 
 
+            }
         }
+
 
 
 
