@@ -657,6 +657,8 @@ namespace NbaFantasyProjekt
                         }
 
                     }
+                    
+                    
                     void AddDraft()
                     {
                         int TeamsComingToodraft;
@@ -811,58 +813,66 @@ namespace NbaFantasyProjekt
                         }
 
 
-                        void StartDraft()
+
+
+
+
+                    }
+                    
+                    
+                    void StartDraft()
+                    {
+                        bool drafting = true;
+                        while (drafting)
                         {
-                            bool drafting = true;
-                            while (drafting)
+                            Console.Clear();
+                            foreach (var draft in drafts)
+
                             {
-                                foreach (var draft in drafts)
+                                Console.WriteLine($"\t\tDraft Name: {draft.DraftName}");
 
+                                Console.WriteLine($"\t\tDraft Order: {draft.DraftOrder}");
+                            }
+
+
+
+
+
+
+                            Console.WriteLine("Lets start the draft!");
+                            Console.WriteLine("All players \n\n");
+                            Console.WriteLine("Rank\tName\tLast Name\tPoints\tAssists\tRebounds\tThrees\tSteals\tBlocks\tT.O\tFG%\tFT%");
+
+                            var availablePlayers = players.Where(p => p.Status).ToList();
+
+                            for (int i = 0; i < availablePlayers.Count; i++)
+
+                            {
+                                var p = availablePlayers[i];
+                                Console.WriteLine(
+                                    $"{players[i].PlayerRank}\t" +
+                                    $"{players[i].Name}\t" +
+                                    $"{players[i].LastName}\t\t" +
+                                    $"{players[i].Points}\t" +
+                                    $"{players[i].Assists}\t" +
+                                    $"{players[i].Rebounds}\t\t" +
+                                    $"{players[i].Threes}\t" +
+                                    $"{players[i].Steals}\t" +
+                                    $"{players[i].Blocks}\t" +
+                                    $"{players[i].Turnovers}\t" +
+                                    $"{players[i].FGpercent}\t" +
+                                    $"{players[i].FTpercent}"
+                                );
+                            }
+                            Console.WriteLine("\nEnter the player's rank:");
+
+                            if (int.TryParse(Console.ReadLine(), out int input))
+                            {
+                                var selectedPlayer = availablePlayers.FirstOrDefault(p => p.PlayerRank == input);
+                                if (selectedPlayer != null)
                                 {
-                                    Console.WriteLine($"\t\tDraft Name: {draft.DraftName}");
 
-                                    Console.WriteLine($"\t\tDraft Order: {draft.DraftOrder}");
-                                }
-
-
-
-
-
-
-                                Console.WriteLine("Lets start the draft!");
-                                Console.WriteLine("All players \n\n");
-                                Console.WriteLine("Rank\tName\tLast Name\tPoints\tAssists\tRebounds\tThrees\tSteals\tBlocks\tT.O\tFG%\tFT%");
-
-                                var availablePlayers = players.Where(p => p.Status).ToList();
-
-                                for (int i = 0; i < availablePlayers.Count; i++)
-
-                                {
-                                    var p = availablePlayers[i];
-                                    Console.WriteLine(
-                                        $"{players[i].PlayerRank}\t" +
-                                        $"{players[i].Name}\t" +
-                                        $"{players[i].LastName}\t\t" +
-                                        $"{players[i].Points}\t" +
-                                        $"{players[i].Assists}\t" +
-                                        $"{players[i].Rebounds}\t\t" +
-                                        $"{players[i].Threes}\t" +
-                                        $"{players[i].Steals}\t" +
-                                        $"{players[i].Blocks}\t" +
-                                        $"{players[i].Turnovers}\t" +
-                                        $"{players[i].FGpercent}\t" +
-                                        $"{players[i].FTpercent}"
-                                    );
-                                }
-                                Console.WriteLine("\nEnter the player's rank:");
-
-                                if (int.TryParse(Console.ReadLine(), out int input))
-                                {
-                                    var selectedPlayer = availablePlayers.FirstOrDefault(p => p.PlayerRank == input);
-                                    if (selectedPlayer != null)
-                                    {
-
-                                        Console.WriteLine($"Selected: {selectedPlayer.Name} {selectedPlayer.LastName}");
+                                    Console.WriteLine($"Selected: {selectedPlayer.Name} {selectedPlayer.LastName}");
                                     Console.WriteLine($"Current owner: {selectedPlayer.Owner}");
 
                                     Console.WriteLine("Enter new owner:");
@@ -877,55 +887,58 @@ namespace NbaFantasyProjekt
                                         string draftMore = Console.ReadLine();
                                         if (draftMore?.Trim().ToUpper() != "Y")
                                         {
+
                                             drafting = false; // exit loop if not 'Y'
                                         }
-                                     
-                                    }
-                                    }
-                                    else
-                                    {
-                                        Console.WriteLine("Invalid input for owner.");
+                                        Console.WriteLine("Would you like to see the draft so far");
+                                        string viewDraftsChoice = Console.ReadLine();
+                                        if (viewDraftsChoice?.Trim().ToUpper() == "Y")
+                                        {
+                                            Console.Clear();
+                                            ViewDraft();  
+                                        }
+                                        
                                     }
                                 }
                                 else
                                 {
-                                    Console.WriteLine("Invalid player rank or player already drafted.");
+                                    Console.WriteLine("Invalid input for owner.");
                                 }
                             }
-
-                        }
-
-
-
-
-
-                        void ViewDraft()
-                        {
-                            void ListPlayersByOwner(List<PlayerRank_Stats> players, List<Teams> teams)
+                            else
                             {
-                                var grouped = players
-                                    .OrderBy(p => p.Owner)
-                                    .GroupBy(p => p.Owner);
-
-                                foreach (var group in grouped)
-                                {
-                                    // Find the team for this owner
-                                    var team = teams.FirstOrDefault(t => t.TeamOwner == group.Key);
-                                    string teamName = team != null ? team.TeamName : "(No Team)";
-
-                                    Console.WriteLine($"Team: {teamName} | Owner: {group.Key}");
-                                    foreach (var player in group)
-                                    {
-                                        Console.WriteLine($"  {player.PlayerRank}. {player.Name} {player.LastName}");
-                                    }
-                                    Console.WriteLine();
-                                }
-                                Console.ReadKey();
+                                Console.WriteLine("Invalid player rank or player already drafted.");
                             }
-
-                            ListPlayersByOwner(players, teams);
                         }
+
                     }
+                    void ViewDraft()
+                    {
+                        void ListPlayersByOwner(List<PlayerRank_Stats> players, List<Teams> teams)
+                        {
+                            var grouped = players
+                                .OrderBy(p => p.Owner)
+                                .GroupBy(p => p.Owner);
+
+                            foreach (var group in grouped)
+                            {
+                                // Find the team for this owner
+                                var team = teams.FirstOrDefault(t => t.TeamOwner == group.Key);
+                                string teamName = team != null ? team.TeamName : "(No Team)";
+
+                                Console.WriteLine($"Team: {teamName} | Owner: {group.Key}");
+                                foreach (var player in group)
+                                {
+                                    Console.WriteLine($"  {player.PlayerRank}. {player.Name} {player.LastName}");
+                                }
+                                Console.WriteLine();
+                            }
+                            Console.ReadKey();
+                        }
+
+                        ListPlayersByOwner(players, teams);
+                    }
+
 
                 }
 
