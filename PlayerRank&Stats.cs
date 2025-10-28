@@ -51,7 +51,7 @@
             TeamName = teamName;
             TeamOwner = teamOwner;
         }
-
+        public Teams() { }
         public Teams(int teamNumber, string teamOwner, string teamName, string draftOrder)
         {
             TeamNumber = teamNumber;

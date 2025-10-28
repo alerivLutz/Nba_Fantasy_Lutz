@@ -139,7 +139,8 @@ namespace NbaFantasyProjekt
                         Console.WriteLine("Please press the following key to navigate in the menu");
                         Console.WriteLine("(1)\t➕ Add Players to the data base.");
                         Console.WriteLine("(2)\t❌ Remove players from the data base.");
-                        Console.WriteLine("(3)\t🔙 Return to the main menu.");
+                        Console.WriteLine("(3)\t 👀 View Players Databank");
+                        Console.WriteLine("(4)\t🔙 Return to the main menu.");
                         var input = Console.ReadKey();
 
                         Console.Clear();
@@ -154,7 +155,12 @@ namespace NbaFantasyProjekt
                             case '2':
                                 RemovePlayer();
                                 break;
+
                             case '3':
+                                ViewPlayerRanks();
+                                break;
+
+                            case '4':
                                 return;
 
 
@@ -466,6 +472,39 @@ namespace NbaFantasyProjekt
 
                         Console.ReadKey();
                     }
+                    void ViewPlayerRanks()
+                    {
+                        Console.WriteLine("Rank\tName\tLast Name\tPoints\tAssists\tRebounds\tThrees\tSteals\tBlocks\tT.O\tFG%\tFT%");
+
+                        
+
+                        for (int i = 0; i < players.Count; i++)
+
+                        {
+                            
+                            Console.WriteLine(
+                                $"{players[i].PlayerRank}\t" +
+                                $"{players[i].Name}\t" +
+                                $"{players[i].LastName}\t\t " +
+                                $"{players[i].Points}\t" +
+                                $"{players[i].Assists}\t" +
+                                $"{players[i].Rebounds}\t\t" +
+                                $"{players[i].Threes}\t" +
+                                $"{players[i].Steals}\t" +
+                                $"{players[i].Blocks}\t" +
+                                $"{players[i].Turnovers}\t" +
+                                $"{players[i].FGpercent}\t" +
+                                $"{players[i].FTpercent}"
+                            );
+
+
+
+                        }
+                            Console.ReadKey();
+
+
+                    }
+
 
 
 
@@ -657,8 +696,8 @@ namespace NbaFantasyProjekt
                         }
 
                     }
-                    
-                    
+
+
                     void AddDraft()
                     {
                         int TeamsComingToodraft;
@@ -818,8 +857,8 @@ namespace NbaFantasyProjekt
 
 
                     }
-                    
-                    
+
+
                     void StartDraft()
                     {
                         bool drafting = true;
@@ -895,9 +934,9 @@ namespace NbaFantasyProjekt
                                         if (viewDraftsChoice?.Trim().ToUpper() == "Y")
                                         {
                                             Console.Clear();
-                                            ViewDraft();  
+                                            ViewDraft();
                                         }
-                                        
+
                                     }
                                 }
                                 else
@@ -940,36 +979,34 @@ namespace NbaFantasyProjekt
                     }
 
 
+
+
+                    void SavePlayersToJson(List<PlayerRank_Stats> players)
+                    {
+                        string filePath = "players.json";
+                        string json = JsonSerializer.Serialize(players, new JsonSerializerOptions { WriteIndented = true });
+                        File.WriteAllText(filePath, json);
+                        Console.WriteLine("Players successfully saved to JSON file!");
+                    }
+                    void SaveDraftsToJson(List<Draft> drafts)
+                    {
+                        string filePath = "drafts.json";
+                        string json = JsonSerializer.Serialize(drafts, new JsonSerializerOptions { WriteIndented = true });
+                        File.WriteAllText(filePath, json);
+                        Console.WriteLine("Drafts successfully saved to JSON file!");
+                    }
+                    void SaveTeamsToJson(List<Teams> teams)
+                    {
+                        string filePath = "teams.json";
+                        string json = JsonSerializer.Serialize(teams, new JsonSerializerOptions { WriteIndented = true });
+                        File.WriteAllText(filePath, json);
+                        Console.WriteLine("Teams successfully saved to JSON file!");
+                    }
+
+
+
+
                 }
-
-
-
-
-                void SavePlayersToJson(List<PlayerRank_Stats> players)
-                {
-                    string filePath = "players.json";
-                    string json = JsonSerializer.Serialize(players, new JsonSerializerOptions { WriteIndented = true });
-                    File.WriteAllText(filePath, json);
-                    Console.WriteLine("Players successfully saved to JSON file!");
-                }
-                void SaveDraftsToJson(List<Draft> drafts)
-                {
-                    string filePath = "drafts.json";
-                    string json = JsonSerializer.Serialize(drafts, new JsonSerializerOptions { WriteIndented = true });
-                    File.WriteAllText(filePath, json);
-                    Console.WriteLine("Drafts successfully saved to JSON file!");
-                }
-                void SaveTeamsToJson(List<Teams> teams)
-                {
-                    string filePath = "teams.json";
-                    string json = JsonSerializer.Serialize(teams, new JsonSerializerOptions { WriteIndented = true });
-                    File.WriteAllText(filePath, json);
-                    Console.WriteLine("Teams successfully saved to JSON file!");
-                }
-
-
-
-
             }
         }
 

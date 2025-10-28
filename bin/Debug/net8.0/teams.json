@@ -1,1 +1,20 @@
-[]
+[
+  {
+    "TeamNumber": 0,
+    "TeamName": "Lakers",
+    "TeamOwner": "Flick",
+    "DraftOrder": null
+  },
+  {
+    "TeamNumber": 0,
+    "TeamName": "Mavs",
+    "TeamOwner": "Alexander",
+    "DraftOrder": null
+  },
+  {
+    "TeamNumber": 0,
+    "TeamName": "Bulls",
+    "TeamOwner": "Melwin",
+    "DraftOrder": null
+  }
+]
